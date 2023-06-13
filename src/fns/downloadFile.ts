@@ -5,7 +5,7 @@ import http from "node:http";
 type ProgressCallback = (chunkLength: number, downloaded: number, total: number) => void;
 
 function getFileName(url: string) {
-  return new URL(url).pathname.split("/").pop();
+  return decodeURIComponent(new URL(url).pathname.split("/").pop()!);
 }
 export default async function downloadFile(url: string, progressCallback?: ProgressCallback): Promise<string> {
   const urlProtocol = new URL(url).protocol;
