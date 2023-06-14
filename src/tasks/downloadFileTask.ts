@@ -25,9 +25,11 @@ export default async function downloadFileTask(event: NewMessageEvent) {
     inDebounce = true;
     setTimeout(() => (inDebounce = false), updateDelay);
 
-    replyMessage.edit({
-      text: `Downloading ${formatBytes(downloaded)} / ${formatBytes(total)}`,
-    });
+    try {
+      replyMessage.edit({
+        text: `Downloading ${formatBytes(downloaded)} / ${formatBytes(total)}`,
+      });
+    } catch {}
   });
   await bot.sendFile(event.chatId, {
     file: filePath,
@@ -37,7 +39,9 @@ export default async function downloadFileTask(event: NewMessageEvent) {
       setTimeout(() => (inDebounce = false), updateDelay);
 
       const percentNumber = Math.round(progress * 100);
-      replyMessage.edit({ text: `Uploading ${percentNumber}%` });
+      try {
+        replyMessage.edit({ text: `Uploading ${percentNumber}%` });
+      } catch {}
     },
   });
   await replyMessage.delete({ revoke: true });
