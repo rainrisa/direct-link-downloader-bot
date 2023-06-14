@@ -14,4 +14,4 @@ RUN yarn build
 
 CMD ["yarn", "start"]
 
-EXPOSE 8080
+EXPOSE 8080/http
