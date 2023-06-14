@@ -13,3 +13,5 @@ COPY . ./
 RUN yarn build
 
 CMD ["yarn", "start"]
+
+EXPOSE 8080/tcp
